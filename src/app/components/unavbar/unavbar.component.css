@@ -1,0 +1,109 @@
+#up-bar {
+    background-color: rgb(105, 12, 4);
+    height: 50px;
+    border-bottom: 2px solid black;
+    position: relative;
+}
+
+h1{
+    font-family: 'K2D', sans-serif;
+    color:white;
+    font-style: italic;
+    display: inline;
+    margin-left: 30px;
+    line-height: 50px;
+}
+
+#up-bar-funcs{
+    display: inline;
+    float: right;
+}
+
+#up-bar-funcs{
+    display: inline;   
+    position: relative; 
+    margin-right: 30px;
+    height: 100%;
+}
+
+#up-bar-funcs form input {
+    height: 70%;
+    width: 300px;
+    margin-top: 8px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    text-align: center;
+    background-color:  rgb(71, 9, 3);
+    border:0;
+    color:rgba(255, 255, 255, 0.877);
+    border-radius: 5px;
+    outline: 0;
+}
+
+#up-bar-funcs form input:focus{
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    background-color:  rgba(71, 9, 3,.6);
+}
+
+#up-bar-funcs * {
+    display: inline;
+    margin-left: 30px;
+    line-height: 40px;
+}
+
+#up-bar-funcs i, span {
+    color: white;
+    cursor: pointer;
+}
+
+
+#up-bar-funcs .fa-angle-down{
+    margin-left:10px;
+}
+
+#menu{
+    width: 90%;
+    margin:0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    margin-top: 30px;
+    
+}
+
+#opc-user{
+    position: absolute;
+    right: 20px;
+    top:48px;
+    z-index: 999;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    display: none;
+    border-radius: 5px;
+}
+
+#opc-user ul{
+    display: inline;
+}
+
+#opc-user ul li{
+    list-style-type: none;
+    background-color: rgb(105, 12, 4);
+    border-bottom: 3px solid black;
+    font-size: 1.1em;   
+    padding:10px;
+    text-align: center;
+}
+
+#opc-user ul li a{
+    color: white;
+    text-decoration: none;
+}
