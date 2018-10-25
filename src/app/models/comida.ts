@@ -1,5 +1,7 @@
-export class Comida {
-    $id: string;
-    name: string;
-    desc: string;
+export interface Comida {
+    $id?: string;
+    name?: string;
+    desc?: string;
+    price?: number;
+    img?: string;
 }

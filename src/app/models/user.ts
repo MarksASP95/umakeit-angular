@@ -1,6 +1,8 @@
 export class User {
-    $id: string;
-    username: string;
+    uid: string;
+    username?: string;
     password: string;
-    cart: [{Comida,Object}];
+    //cart?: [{Comida,Object}];
+    email: string;
+
 }
