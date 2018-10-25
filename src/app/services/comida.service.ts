@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // firebase
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection  } from '@angular/fire/firestore';
 
 // models
 import { Comida } from '../models/comida';
@@ -11,31 +13,51 @@ import { Comida } from '../models/comida';
 })
 export class ComidaService {
 
-  comidaList: AngularFireList<any>;
-  selectedComida: Comida = new Comida();
+  comidasCollection;
+  comidaDoc;
+  comidas: Observable<Comida[]>;
+  searchText;
 
-  constructor(private firebase: AngularFireDatabase) { }
+  constructor(public db: AngularFirestore) { 
+  }
+
+
 
   getComidas(){
-    return this.comidaList = this.firebase.list('comidas');
+    return this.db.collection('comidas').snapshotChanges();
+}
+/*   getComidasSearch(comidaSearch: string){
+     this.comidas = this.db.collection('comidas').snapshotChanges().pipe(map(changes=> {
+      return changes.map(action => {
+          const data = action.payload.doc.data() as Comida;
+          return data;
+      });
+    }));
+    return this.comidas.pipe(map(arr => arr.filter( r => r.name. >= comidaSearch ))) 
+  //  this.comidas = this.db.collection('comidas', ref => ref.where("name", ">=", comidaSearch));
+  } */
+
+  searchComidas(){
+    if(this.searchText !== undefined){
+      return this.db.collection('comidas', ref => ref.orderBy('name').startAt(this.searchText).endAt(this.searchText+'\uf8ff')).snapshotChanges();
+    }
+    return null;
+  }
+
+  changeSearchText(searchText: string){
+    this.searchText = searchText;
   }
 
   insertComida(comida: Comida){
-    this.comidaList.push({
-      name: comida.name,
-      desc: comida.desc
-    });
+
   }
 
   updateComida(comida: Comida){
-    this.comidaList.update(comida.$id, {
-      name: comida.name,
-      desc: comida.desc
-    });
+
   }
 
   deleteComida($id: string){
-    this.comidaList.remove($id);
+
   }
 
 }
