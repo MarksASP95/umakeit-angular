@@ -1,35 +1,86 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { environment } from '../environments/environment';
+
+import { CoreModule } from './core/core.module';
+
+// ngx-bootstrap
+import { ModalModule } from 'ngx-bootstrap';
+import { TabsModule } from 'ngx-bootstrap';
 
 // firebase
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireModule } from 'angularfire2';
-import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 // components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UnavbarComponent } from './components/unavbar/unavbar.component';
+import { ComidainfoComponent } from './components/comidainfo/comidainfo.component';
 
 // services
 import { AdminService } from './services/admin.service';
 import { ComidaService } from './services/comida.service';
-import { UnavbarComponent } from './components/unavbar/unavbar.component';
+import { LogRegComponent } from './components/log-reg/log-reg.component';
+import { SearchComponent } from './components/search/search.component';
+import { CartComponent } from './components/cart/cart.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'auth',
+    component: LogRegComponent
+  },
+  {
+    path: 'search',
+    component: SearchComponent
+  },
+  {
+    path: 'cart',
+    component: CartComponent
+  }
+]
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    UnavbarComponent
+    UnavbarComponent,
+    ComidainfoComponent,
+    LogRegComponent,
+    SearchComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFirestoreModule,
+    ModalModule.forRoot(),
+    RouterModule.forRoot(routes),
+    TabsModule.forRoot(),
+    FormsModule,
+    CoreModule
   ],
   providers: [
     AdminService,
-    ComidaService
+    ComidaService,
+    SearchComponent,
+    AngularFireAuth
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ComidainfoComponent]
 })
 export class AppModule { }
