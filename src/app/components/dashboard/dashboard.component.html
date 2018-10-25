@@ -1,3 +1,40 @@
-<p>
-  dashboard works!
-</p>
+<app-unavbar [showSearch]="true" [showUser]="false"></app-unavbar>
+
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <img src="" alt="food-alt" width="100%" />
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Al carrito</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="menu" >
+  <ng-container *ngFor="let comida of comidas">
+      <div *ngIf="comida.avaiable" class="card">
+          <img class="card-img-top" src="../../../assets/img/{{comida.img}}.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{comida.name}}</h5>
+            <p class="card-text">{{comida.desc}}</p>
+            <strong style="color:green; display:block; text-align: center; font-size: 1.3em;">${{comida.price}}</strong>
+            <a (click)="openModal(comida)" class="btn btn-primary">Ver</a>
+          </div>
+      </div>
+  </ng-container>
+</div>
+
+
+
