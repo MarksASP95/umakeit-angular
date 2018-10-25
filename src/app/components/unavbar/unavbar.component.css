@@ -1,3 +1,17 @@
+@font-face {
+    font-family: ProductSans;
+    src: url('../../../assets/fonts/ProductSansRegular.ttf');
+}
+
+*{
+    margin:0;
+    padding: 0;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
 #up-bar {
     background-color: rgb(105, 12, 4);
     height: 50px;
@@ -88,6 +102,7 @@ h1{
     border-right: 3px solid black;
     display: none;
     border-radius: 5px;
+    padding:0;
 }
 
 #opc-user ul{
@@ -106,4 +121,8 @@ h1{
 #opc-user ul li a{
     color: white;
     text-decoration: none;
+}
+
+#menu-btn{
+    display:none;
 }

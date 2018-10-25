@@ -1,19 +1,29 @@
 <div id="up-bar">
-  <h1>uMakeIt!</h1>
-  <div *ngIf="show" id="up-bar-funcs">
-      <form name="search" action="busqueda.html">
-          <input type="text" placeholder="Buscar producto...">
-      </form>
-      <span class="username">someUser <i class="fas fa-angle-down"></i></span>
-  </div>
-  <i class="fa fa-bars" id="menu-btn"></i>
+  <a routerLink="/"><h1>uMakeIt!</h1></a>
+<div id="up-bar-funcs">
+<form *ngIf="showSearch" name="search" (ngSubmit)="submitSearch(searchText)">
+        <input [(ngModel)]="searchText" name="search" type="text" placeholder="Buscar producto...">
+    </form>
+    <div *ngIf="auth.user | async; then authenticated else guest"></div>
+    <ng-template #guest>
+        <a id="btn" style="color:white;" routerLink="/auth">
+            Entrar / Registrarse
+        </a>
+    </ng-template>
+    <ng-template #authenticated>
+        <span *ngIf="auth.user | async as user" class="username">{{user.username}}<i class="fas fa-angle-down"></i></span>
+    </ng-template>
+
 </div>
 
-<div id="opc-user">
-  <ul>
-      <li><a href="cambio_clave.html">Cambio de clave</a></li>
-      <li><a href="compras.html">Compras</a></li>
-      <li><a href="carrito.html">Orden</a></li>
-      <li><a href="login_register.html">Salir</a></li>
-  </ul>
+  <div id="opc-user">
+    <ul>
+        <li><a href="#">Cambio de clave</a></li>
+        <li><a href="#">Compras</a></li>
+        <li><a routerLink="/cart">Orden</a></li>
+        <li><a (click)="signOut()">Salir</a></li>
+    </ul>
+  </div>
 </div>
+
+
