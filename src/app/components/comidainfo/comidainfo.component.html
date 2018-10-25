@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}} - <strong style="color:green;">${{price}}</strong></h4>
+    
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <img src="../../../assets/img/{{img}}.jpg" alt="">
+    <p>{{bodyText}}</p>
+    <form>
+      <select id="size">
+        <option value="Grande">Grande</option>
+        <option value="Mediano" selected>Mediano</option>
+        <option value="Pequeño">Pequeño</option>
+      </select>
+    </form>
+    <button (click)="addToCart()" class="btn btn-primary">Al carrito</button>
+</div>

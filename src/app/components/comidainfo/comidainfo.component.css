@@ -1,0 +1,22 @@
+img{
+    display:block;
+    width:100%;
+}
+
+.modal-body{
+    padding:0;
+}
+
+p{
+    margin:20px;
+}
+
+.btn{
+    display:block;
+    margin: 20px auto;
+}
+
+select{
+    display: block;
+    margin:0 auto;
+}
