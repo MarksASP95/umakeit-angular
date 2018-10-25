@@ -1,0 +1,39 @@
+<app-unavbar></app-unavbar>
+
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <img src="" alt="food-alt" width="100%" />
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id="menu" >
+    <ng-container *ngFor="let comida of comidas">
+        <div class="card">
+            <img class="card-img-top" src="../../../assets/img/{{comida.img}}.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{comida.title}}</h5>
+              <div style="margin-top:30px">
+                  <strong style="color:green; display:block; text-align: center; font-size: 1.3em;">${{comida.price}}</strong>
+                  <a (click)="openModal(comida)" class="btn btn-primary">Ver</a>
+                  <button (click)="outOfCart(comida)" type="button" style="margin-top:10px;" class="btn btn-danger">Sacar del carrito</button>
+              </div>
+            </div>
+        </div>
+    </ng-container>
+  </div>
+
+<a class="btn btn-success" href="caja.html" role="button">Ir a Caja <i class="fas fa-sign-in-alt"></i></a>
