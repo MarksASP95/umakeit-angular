@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-comidainfo',
   templateUrl: './comidainfo.component.html',
@@ -8,14 +10,14 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 export class ComidainfoComponent implements OnInit {
 
-  title;
-  bodyText;
-  price;
-  img;
-  select;
-  index;
+  title: string;
+  bodyText: string;
+  price: string;
+  img: string;
+  select: any;
+  index: string;
 
-  constructor(public modalRef: BsModalRef) { }
+  constructor(private modalRef: BsModalRef, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.select = document.getElementById('size');
@@ -26,10 +28,11 @@ export class ComidainfoComponent implements OnInit {
     // Parse the serialized data back into an aray of objects
     a = JSON.parse(localStorage.getItem('cart'));
     // Push the new data (whether it be an object or anything else) onto the array
-    a.push({title: this.title, price: this.price, mode: this.select.options[this.select.selectedIndex].value, img: this.img, index:a.length});
+    a.push({name: this.title, price: this.price, mode: this.select.options[this.select.selectedIndex].value, img: this.img, index:a.length});
     // Re-serialize the array back into a string and store it in localStorage
     localStorage.setItem('cart', JSON.stringify(a));
-    console.log("added");
+    
+    this.toastr.success("Añadido al carrito");
   }
 
 }
