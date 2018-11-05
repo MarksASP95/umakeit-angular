@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+
+// services
 import { ComidaService } from '../../services/comida.service';
-import { Comida } from 'src/app/models/comida';
+
+// components
+import { ComidainfoComponent } from '../comidainfo/comidainfo.component';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+
+// models
+import { Comida } from '../../models/comida';
 
 @Component({
   selector: 'app-search',
@@ -9,7 +17,9 @@ import { Comida } from 'src/app/models/comida';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(public comidaService: ComidaService) { }
+  modalRef: BsModalRef;
+
+  constructor(private comidaService: ComidaService, private modalService: BsModalService) { }
 
   comidas = [];
 
@@ -34,6 +44,18 @@ export class SearchComponent implements OnInit {
     }
 
   }
+
+  openModal(comida: Comida){
+    this.modalRef = this.modalService.show(ComidainfoComponent,{
+      initialState:{
+        title: comida.name,
+        img: comida.img,
+        bodyText: comida.desc,
+        price: comida.price
+      }
+    });
+  }
+
 
 
 

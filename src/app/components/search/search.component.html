@@ -2,7 +2,7 @@
 <div id="menu">
   <ng-container *ngFor="let comida of comidas">
       <div *ngIf="comida.avaiable" class="card">
-          <img class="card-img-top" src="../../../assets/img/{{comida.img}}.jpg" alt="Card image cap">
+          <img class="card-img-top" [src]="comida.img" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{comida.name}}</h5>
             <p class="card-text">{{comida.desc}}</p>
