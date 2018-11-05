@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
+// components
+import { ComidainfoComponent } from '../comidainfo/comidainfo.component';
+
+// models
+import { Comida } from '../../models/comida';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -9,8 +18,9 @@ import * as $ from 'jquery';
 export class CartComponent implements OnInit {
 
   comidas;
+  modalRef: BsModalRef;
 
-  constructor() { }
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
     this.comidas = JSON.parse(localStorage.getItem('cart'));
@@ -35,6 +45,17 @@ export class CartComponent implements OnInit {
       localStorage.setItem('cart', JSON.stringify(obj));
     }
     
+  }
+
+  openModal(comida: Comida){
+    this.modalRef = this.modalService.show(ComidainfoComponent,{
+      initialState:{
+        title: comida.name,
+        img: comida.img,
+        bodyText: comida.desc,
+        price: comida.price
+      }
+    });
   }
 
 }
