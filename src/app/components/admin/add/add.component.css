@@ -1,0 +1,77 @@
+form{
+    width: 500px;
+    margin: 0 auto;
+    border: 2px solid black;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: rgba(204, 200, 200, .8);
+    margin-bottom: 30px;
+}
+
+form label{
+    font-weight: bold;
+}
+
+h2{
+    color:white;
+    text-align: center;
+    margin-top:20px;
+}
+
+form input[type="checkbox"]{
+    margin-left: 20px;
+}
+
+form input[type="file"]{
+    width: 100%;
+}
+
+#button-group{
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+
+#progress-bar-parent{
+    display: none;
+    width: 80%;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    background-color: rgb(192, 192, 192);
+}
+
+#progress-bar{
+    display: block;
+    height: 4px;
+    width: 0;
+    background-color: #28a745;
+    border-radius: 10px;
+    transition: width .2s ease-in-out;
+}
+
+.aux-text{
+    text-align: center;
+    font-weight: bold;
+}
+
+#not-ready{
+    height: 20px;
+    width: 20px;
+    background-image: url('../../../../assets/img/spin.gif');
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+}
+
+@media (max-width: 540px){
+    form{
+        width:90%;
+    }
+}
