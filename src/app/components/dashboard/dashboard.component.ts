@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
-
 // components
 import { ComidainfoComponent } from '../comidainfo/comidainfo.component';
 
@@ -11,10 +9,12 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 // services
 import { ComidaService } from '../../services/comida.service';
-import { AuthService } from '../../core/auth.service';
+import { ImgStorageService } from '../../services/img-storage.service';
 
 // models
 import { Comida } from 'src/app/models/comida';
+
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,12 +26,11 @@ export class DashboardComponent implements OnInit {
   comidas = [];
   modalRef: BsModalRef;
 
-  constructor(private comidaService: ComidaService, private modalService: BsModalService, public auth: AuthService) { }
+  constructor(private comidaService: ComidaService, 
+              private modalService: BsModalService,
+              private imgStorageService: ImgStorageService) { }
 
   ngOnInit() {
-
-
-  
     this.comidaService.getComidas().subscribe(comidas => {
       this.comidas = comidas.map(snap => {
         let obj = {
@@ -51,6 +50,12 @@ export class DashboardComponent implements OnInit {
         bodyText: comida.desc,
         price: comida.price
       }
+    });
+  }
+
+  getImage(comida){
+    return this.imgStorageService.getURL(comida.img).subscribe(value => {
+      return value
     });
   }
 
