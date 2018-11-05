@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import * as $ from 'jquery';
 
 import { ComidaService } from '../../services/comida.service';
-import { AuthService } from '../../core/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 import { SearchComponent } from '../search/search.component';
 
@@ -18,7 +18,6 @@ export class UnavbarComponent implements OnInit {
   @Input() showUser: boolean;
   username: string;
   searchText: string;
-  currentUser;
 
   constructor(public router: Router, public comidaService: ComidaService, public searchComponent: SearchComponent, public auth: AuthService) { }
 

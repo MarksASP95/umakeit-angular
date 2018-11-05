@@ -4,7 +4,7 @@
 <form *ngIf="showSearch" name="search" (ngSubmit)="submitSearch(searchText)">
         <input [(ngModel)]="searchText" name="search" type="text" placeholder="Buscar producto...">
     </form>
-    <div *ngIf="auth.user | async; then authenticated else guest"></div>
+    <ng-container *ngIf="auth.user | async; then authenticated else guest"></ng-container>
     <ng-template #guest>
         <a id="btn" style="color:white;" routerLink="/auth">
             Entrar / Registrarse
