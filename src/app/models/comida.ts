@@ -4,4 +4,5 @@ export interface Comida {
     desc?: string;
     price?: number;
     img?: string;
+    modificable: boolean;
 }
