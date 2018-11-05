@@ -7,6 +7,10 @@ import { environment } from '../environments/environment';
 
 import { CoreModule } from './core/core.module';
 
+// ngx-toastr
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 // ngx-bootstrap
 import { ModalModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap';
@@ -15,6 +19,7 @@ import { TabsModule } from 'ngx-bootstrap';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 // components
 import { AppComponent } from './app.component';
@@ -28,6 +33,11 @@ import { ComidaService } from './services/comida.service';
 import { LogRegComponent } from './components/log-reg/log-reg.component';
 import { SearchComponent } from './components/search/search.component';
 import { CartComponent } from './components/cart/cart.component';
+import { PanelComponent } from './components/admin/panel/panel.component';
+import { AddComponent } from './components/admin/add/add.component';
+import { HabDesComponent } from './components/admin/hab-des/hab-des.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { EditComponent } from './components/admin/edit/edit.component';
 
 const routes: Routes = [
   {
@@ -50,6 +60,24 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent
+  },
+  {
+    path: 'admin',
+    children: [
+      {
+        path: '',
+        redirectTo: 'panel',
+        pathMatch: 'full'
+      },
+      {
+        path: 'panel',
+        component: PanelComponent
+      },
+      {
+        path: 'agregar',
+        component: AddComponent
+      }
+    ]
   }
 ]
 
@@ -62,7 +90,12 @@ const routes: Routes = [
     ComidainfoComponent,
     LogRegComponent,
     SearchComponent,
-    CartComponent
+    CartComponent,
+    PanelComponent,
+    AddComponent,
+    HabDesComponent,
+    ChangePasswordComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +105,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     TabsModule.forRoot(),
     FormsModule,
-    CoreModule
+    CoreModule,
+    AngularFireStorageModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AdminService,
