@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 // firebase
 import { AngularFirestore, AngularFirestoreCollection  } from '@angular/fire/firestore';
@@ -8,24 +7,28 @@ import { AngularFirestore, AngularFirestoreCollection  } from '@angular/fire/fir
 // models
 import { Comida } from '../models/comida';
 
+// services
+import { AuthService } from './auth.service';
+import { ImgStorageService } from './img-storage.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ComidaService {
 
-  comidasCollection;
+/*   comidasCollection;
   comidaDoc;
-  comidas: Observable<Comida[]>;
+  comidas: Observable<Comida[]>; */
   searchText;
 
-  constructor(public db: AngularFirestore) { 
+  constructor(private db: AngularFirestore, private auth: AuthService, private imgStorageService: ImgStorageService) { 
   }
 
 
 
   getComidas(){
     return this.db.collection('comidas').snapshotChanges();
-}
+  }
 /*   getComidasSearch(comidaSearch: string){
      this.comidas = this.db.collection('comidas').snapshotChanges().pipe(map(changes=> {
       return changes.map(action => {
@@ -48,8 +51,24 @@ export class ComidaService {
     this.searchText = searchText;
   }
 
-  insertComida(comida: Comida){
+  addComida(comida: Comida){
+    
 
+    return this.db.collection('comidas').add({
+      name: comida.name,
+      desc: comida.desc,
+      price: comida.price,
+      img: comida.img,
+      modificable: comida.modificable,
+      avaiable: true
+    })
+    .then(docRef => {
+      console.log(`Document written with ID: ${docRef.id}`);
+    })
+    .catch(err => {
+      console.log("3");
+      console.log(`Error adding document => ${err}`);
+    })
   }
 
   updateComida(comida: Comida){
