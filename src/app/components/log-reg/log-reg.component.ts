@@ -3,7 +3,7 @@ import { TabsetComponent } from 'ngx-bootstrap';
 import { UserService } from '../../services/user.service';
 import { User } from 'src/app/models/user';
 
-import { AuthService } from '../../core/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-log-reg',
@@ -33,25 +33,6 @@ export class LogRegComponent implements OnInit {
   }
 
   submitLogin(){
- /*    this.userService.getUser(this.user.username).subscribe(users => {
-      this.users = users.map(snap => {
-        let obj = {
-          username:snap.payload.doc.id,
-          ...snap.payload.doc.data()
-        }
-        this.userExists = true;
-        document.cookie = obj.username;
-      });
-      if(this.userExists){
-        this.userExists = false;
-        document.location.href = "/dashboard";
-      }
-      else{
-        console.log("No existe")
-      }
-    }); */
-
-    //this.auth.emailAndPassword("marcosuarezpetrillo@hotmail.com","matuididios14");
 
     this.auth.emailLogin(this.user.email,this.user.password);
     
