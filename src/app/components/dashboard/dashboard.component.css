@@ -79,8 +79,10 @@ h1 a, h1 a:hover{
 
 .card{
     width: 20%;
-    min-width: 200px;
+    min-width: 250px;
     margin: 0 15px 30px;
+    position: relative;
+    display: inline;
 }
 
 #opc-user{
@@ -155,10 +157,34 @@ h1 a, h1 a:hover{
 	display: block
 }
 
+.img-container{
+    height: 40%;
+}
+
+.img-container img{
+    height: 100%;
+}
+
 .btn {
     color: white !important;
-    display:block;
-    margin:0 auto;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 85%;
+}
+
+.comida-info{
+    margin-bottom: 70px;
+    height: 175px;
+    position: relative;
+}
+
+.comida-info strong{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,0);
 }
 
 #hidden-menu {
