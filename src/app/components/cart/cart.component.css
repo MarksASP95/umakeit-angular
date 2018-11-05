@@ -191,6 +191,14 @@ h1 a, h1 a:hover{
     margin:0 auto;
 }
 
+.img-container{
+    height: 40%;
+}
+
+.img-container img{
+    height: 100%;
+}
+
 #hidden-menu {
 	height: 100%;
 	width: 100%;
