@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 
 import { ComidaService } from '../../services/comida.service';
@@ -12,31 +12,29 @@ import { SearchComponent } from '../search/search.component';
   templateUrl: './unavbar.component.html',
   styleUrls: ['./unavbar.component.css']
 })
-export class UnavbarComponent implements OnInit {
+export class UnavbarComponent implements OnInit, AfterViewInit {
+
+  ngAfterViewInit(){
+
+    // Show options when clicking username
+    $('.username').on('click', function() {
+      let opcUser = $('#opc-user');
+      opcUser.css('display') == 'block' ? opcUser.css({display: 'none'}) : opcUser.css({display: 'block'});
+    });  
+  
+  }
 
   @Input() showSearch: boolean;
   @Input() showUser: boolean;
   username: string;
   searchText: string;
 
-  constructor(public router: Router, public comidaService: ComidaService, public searchComponent: SearchComponent, public auth: AuthService) { }
+  constructor(public router: Router, public comidaService: ComidaService, public searchComponent: SearchComponent, public auth: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-
-
-    // SHOW OPTIONS WHEN CLICKING USERNAME
-
-
-    $(document).ready(function(){
-      $(document).on('click', '.username', function() {
-        let opcUser = $('#opc-user');
-        opcUser.css('display') == 'block' ? opcUser.css({display: 'none'}) : opcUser.css({display: 'block'});
-      });  
-    });
-
-
+    //console.log(this.route.snapshot.data); 
   }
-
+  
   submitSearch(searchText: string){
     console.log("Submitted");
     this.comidaService.changeSearchText(searchText);
@@ -49,11 +47,7 @@ export class UnavbarComponent implements OnInit {
     
   }
 
-
-
   signOut(){
-    /* document.cookie = "";
-    document.location.href = "/"; */
     this.auth.signOut();
     location.reload();
   }
