@@ -27,7 +27,7 @@ export class ComidaService {
 
 
   getComidas(){
-    return this.db.collection('comidas').snapshotChanges();
+    return this.db.collection('comidas', ref => ref.where('avaiable','==',true)).snapshotChanges();
   }
 /*   getComidasSearch(comidaSearch: string){
      this.comidas = this.db.collection('comidas').snapshotChanges().pipe(map(changes=> {
