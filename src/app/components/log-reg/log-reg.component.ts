@@ -28,15 +28,12 @@ export class LogRegComponent implements OnInit {
   }
 
   submitRegister(){
-    //this.userService.addUser(this.user);
+    //console.log(`User: ${this.user.username}\nEmail: ${this.user.email}\nPassword: ${this.user.password}`);
     this.auth.signUp(this.user.email,this.user.password, this.user.username);
   }
 
   submitLogin(){
-
     this.auth.emailLogin(this.user.email,this.user.password);
-    
-    
   }
 }
 
