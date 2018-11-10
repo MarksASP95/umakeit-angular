@@ -38,6 +38,10 @@ import { AddComponent } from './components/admin/add/add.component';
 import { HabDesComponent } from './components/admin/hab-des/hab-des.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { EditComponent } from './components/admin/edit/edit.component';
+import { AuthGuard } from './services/auth.guard';
+import { AdminGuard } from './services/auth.adminguard';
+import { ResolveGuard } from './services/resolve.guard';
+import { ResolveUnavbar } from './services/resolve.unavbar';
 
 const routes: Routes = [
   {
@@ -47,22 +51,46 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    resolve: {
+      userInfo: ResolveUnavbar
+    }
   },
   {
     path: 'auth',
-    component: LogRegComponent
+    component: LogRegComponent,
+    resolve: {
+      userInfo: ResolveUnavbar
+    }
   },
   {
     path: 'search',
-    component: SearchComponent
+    component: SearchComponent,
+    resolve: {
+      userInfo: ResolveUnavbar
+    }
   },
   {
     path: 'cart',
-    component: CartComponent
+    component: CartComponent,
+    resolve: {
+      userInfo: ResolveUnavbar
+    }
+  },
+  {
+    path: 'cambiar_clave',
+    canActivate: [AuthGuard],
+    resolve: {
+      userInfo: ResolveUnavbar
+    },
+    component: ChangePasswordComponent
   },
   {
     path: 'admin',
+    canActivate: [AdminGuard],
+    resolve: {
+      userInfo: ResolveUnavbar
+    },
     children: [
       {
         path: '',
@@ -114,7 +142,11 @@ const routes: Routes = [
     AdminService,
     ComidaService,
     SearchComponent,
-    AngularFireAuth
+    AngularFireAuth,
+    AuthGuard,
+    AdminGuard,
+    ResolveGuard,
+    ResolveUnavbar
   ],
   bootstrap: [AppComponent],
   entryComponents: [ComidainfoComponent]
