@@ -14,8 +14,6 @@ import { ImgStorageService } from '../../services/img-storage.service';
 // models
 import { Comida } from 'src/app/models/comida';
 
-import { AngularFireStorage } from '@angular/fire/storage';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
