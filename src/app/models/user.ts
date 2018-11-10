@@ -4,5 +4,9 @@ export class User {
     password: string;
     carts?: [{Comida,Object}];
     email: string;
+    roles?: {
+        admin: boolean,
+        client: boolean
+    };
 
 }
