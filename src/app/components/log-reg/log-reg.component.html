@@ -7,17 +7,13 @@
         <h2>Entrar</h2>
         <div class="form-group">
             <label for="user">Email</label>
-            <input [(ngModel)]="user.email" name="email" class="form-control" id="user" placeholder="Tu nombre de usuario" >
+            <input [(ngModel)]="user.email" name="email" class="form-control" id="user" placeholder="Tu nombre de usuario" required>
         </div>
         <div class="form-group">
             <label for="user-pass">Contraseña</label>
-            <input [(ngModel)]="user.password" name="password" type="password" class="form-control" id="user-pass" placeholder="Tu contraseña" >
+            <input [(ngModel)]="user.password" name="password" type="password" class="form-control" id="user-pass" placeholder="Tu contraseña" required>
         </div>
         <button type="submit" class="btn btn-primary">Entrar</button>
-        <p id="or">O también puedes</p>
-        <button id="google-btn" (click)="auth.googleLogin()">
-            <i class="fab fa-google"></i> <span>Entrar con Google</span> 
-        </button>
       </form>
     </tab>
     <tab class="nav-item" heading="Registro">
@@ -25,16 +21,17 @@
         <h2>Registro</h2>
         <div class="form-group">
                 <label for="inputUser">Email</label>
-                <input  [(ngModel)]="user.email" name="email" class="form-control" id="inputUser" placeholder="Ingresa tu correo electrónico" >
+                <input  [(ngModel)]="user.email" name="email" class="form-control" id="inputUser" placeholder="Ingresa tu correo electrónico" #email="ngModel" required>
+                
         </div>
         <div class="form-group">
             <label for="inputUser">Usuario</label>
-            <input  [(ngModel)]="user.username" name="username" class="form-control" placeholder="Crea un nombre de usuario" >
+            <input  [(ngModel)]="user.username" name="username" class="form-control" placeholder="Crea un nombre de usuario" required>
             <small id="emailHelp" class="form-text text-muted">Este es el nombre con el que entrarás al sistema.</small>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Contraseña</label>
-            <input  [(ngModel)]="user.password" name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Crea una contraseña" >
+            <input  [(ngModel)]="user.password" name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Crea una contraseña" required>
         </div>
         <button type="submit" class="btn btn-primary">Registrarme</button>
       </form>
