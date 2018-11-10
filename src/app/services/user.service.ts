@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 // firebase
 import { AngularFirestore, AngularFirestoreCollection  } from '@angular/fire/firestore';
-import { User } from '../models/user';
 
 import { Router } from '@angular/router';
 
@@ -25,12 +24,31 @@ export class UserService {
     return this.db.collection('users', ref => ref.where('username','==',username)).snapshotChanges();
   }
 
-  addUser(newEmail, uid, newUsername){
-    this.db.collection("users").doc(uid).set({
-      email: newEmail,
-      username: newUsername
+  usernameIsAvaiable(newUsername){
+    var thisClass = this;
+    return new Promise(function(resolve, reject){
+      thisClass.getUser(newUsername).subscribe(snapshot => {
+        if(snapshot.length == 0 ){
+          resolve();
+        }
+        else{
+          reject(Error('Usuario ya existe'));
+        }
+      });
     });
-    this.router.navigate(['/dashboard']);
+  }
+
+  addUser(newEmail, uid, newUsername){
+
+    return this.db.collection("users").doc(uid).set({
+      email: newEmail,
+      username: newUsername,
+      roles: {
+        client: true,
+        admin: false
+      }
+    });
+
   }
 }
 
