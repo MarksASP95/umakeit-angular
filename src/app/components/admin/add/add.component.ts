@@ -68,6 +68,7 @@ export class AddComponent implements OnInit {
 
     this.comidaService.addComida(comida)
       .then(() => {
+        document.forms[0].reset();
         this.toastr.success('Producto registrado', '¡Listo!');
       })
       .catch(() => {
