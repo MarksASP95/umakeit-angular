@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -36,8 +37,11 @@ export class ImgStorageService {
   }
 
   getURL(key){
+
     const ref = this.storage.ref(key);
+    ref.getDownloadURL();
     this.profileURL = ref.getDownloadURL();
+    
     return this.profileURL;
   }
 
