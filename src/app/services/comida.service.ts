@@ -61,14 +61,7 @@ export class ComidaService {
       img: comida.img,
       modificable: comida.modificable,
       avaiable: true
-    })
-    .then(docRef => {
-      console.log(`Document written with ID: ${docRef.id}`);
-    })
-    .catch(err => {
-      console.log("3");
-      console.log(`Error adding document => ${err}`);
-    })
+    });
   }
 
   updateComida(comida: Comida){
