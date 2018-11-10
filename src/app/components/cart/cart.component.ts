@@ -44,6 +44,9 @@ export class CartComponent implements OnInit {
       }
       localStorage.setItem('cart', JSON.stringify(obj));
     }
+
+    this.comidas = JSON.parse(localStorage.getItem('cart'));
+    console.log(obj);
     
   }
 
