@@ -5,11 +5,11 @@
     <form>
         <div class="form-group">
             <label for="nombre">Nombre del producto</label>
-            <input class="form-control" type="text" name="name" id="nombre">
+            <input [(ngModel)]="c_nombre" class="form-control" type="text" name="name" id="nombre">
         </div>
         <div class="form-group">
             <label for="desc">Descripción</label>
-            <textarea class="form-control" name="desc" id="desc" style="resize: none; width: 100%;"></textarea>
+            <textarea [(ngModel)]="c_desc" class="form-control" name="desc" id="desc" style="resize: none; width: 100%;"></textarea>
         </div>
         <div class="form-group">
             <label for="imagen">Imagen 
@@ -27,18 +27,15 @@
         </div>
         <div class="form-group">
             <label for="precio">Precio</label>
-            <input class="form-control" type="text" name="price">
+            <input [(ngModel)]="c_price" class="form-control" type="text" name="price">
         </div>
         <div class="form-group">
             <label for="modificable">Modificable</label>
-            <input type="checkbox" id="modificable" name="modificable" checked>
+            <input [(ngModel)]="c_modificable" type="checkbox" id="modificable" name="modificable" checked>
         </div>
 
         <div id="button-group">
             <button (click)="submitComida()" id="agregar" class="btn btn-primary">Agregar</button>
             <button type="reset" class="btn btn-secondary">Limpiar</button>
-            <button (click)="showURL()">Show image</button>
         </div>
-
-        <img id="fetched-img" src="">
     </form>

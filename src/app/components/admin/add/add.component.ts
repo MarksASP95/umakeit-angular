@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
-
 import { ToastrService } from 'ngx-toastr';
 
 // services
@@ -20,19 +17,21 @@ import { Comida } from '../../../models/comida';
 export class AddComponent implements OnInit {
 
   uploadPercent;
-  downloadURL: Observable<string>;
-  profileURL: Observable<string | null>;
   fileName: string;
   progressBarValue;
   url: string;
 
-  constructor(private storage: AngularFireStorage, 
-              private imgStorageService: ImgStorageService, 
+  // datos de comida
+  c_nombre: string;
+  c_desc: string;
+  c_price: string;
+  c_modificable: boolean;
+
+  constructor(private imgStorageService: ImgStorageService, 
               private comidaService: ComidaService,
               private toastr: ToastrService) { }
 
   ngOnInit() {
-
   }
 
   uploadImage(event){
@@ -50,33 +49,29 @@ export class AddComponent implements OnInit {
   }
 
   async submitComida(){
-    const comidaForm = document.forms[0];
 
     await this.imgStorageService.getURL(this.fileName).toPromise()
       .then(value => {
         this.url = value;
       })
-    
+      .catch((error) => {
+        console.log(error);
+      });
+
     const comida: Comida = {
-      name: comidaForm['name'].value,
-      desc: comidaForm['desc'].value,
-      price: parseFloat(comidaForm['price'].value),
+      name: this.c_nombre,
+      desc: this.c_desc,
+      price: parseFloat(this.c_price),
       img: this.url,
-      modificable: comidaForm['modificable'].checked
+      modificable: document.forms[0]['modificable'].checked
     }
 
     this.comidaService.addComida(comida)
       .then(() => {
         this.toastr.success('Producto registrado', '¡Listo!');
+      })
+      .catch(() => {
+        this.toastr.error('El producto no ha podido registrarse','Error');
       });
   }
-
-  showURL(){
-    this.imgStorageService.getURL(this.fileName).subscribe(value => {
-      document.getElementById('fetched-img').setAttribute('src', value);
-    });
-  }
-
-  
-
 }
