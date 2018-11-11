@@ -29,6 +29,10 @@ export class ComidaService {
   getComidas(){
     return this.db.collection('comidas', ref => ref.where('avaiable','==',true)).snapshotChanges();
   }
+
+  getAllComidas(){
+    return this.db.collection('comidas').snapshotChanges();
+  }
 /*   getComidasSearch(comidaSearch: string){
      this.comidas = this.db.collection('comidas').snapshotChanges().pipe(map(changes=> {
       return changes.map(action => {
@@ -65,7 +69,13 @@ export class ComidaService {
   }
 
   updateComida(comida: Comida){
-
+    return this.db.collection('comidas').doc(comida.$id).set({
+      name: comida.name,
+      desc: comida.desc,
+      price: comida.price,
+      modificable: comida.modificable,
+      img: comida.img
+    })
   }
 
   deleteComida($id: string){
