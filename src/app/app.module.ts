@@ -104,6 +104,10 @@ const routes: Routes = [
       {
         path: 'agregar',
         component: AddComponent
+      },
+      {
+        path: 'editar',
+        component: EditComponent
       }
     ]
   }
