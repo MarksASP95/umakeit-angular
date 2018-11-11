@@ -19,7 +19,7 @@ export class UnavbarComponent implements OnInit, AfterViewInit {
     // Show options when clicking username
     $('.username').on('click', function() {
       let opcUser = $('#opc-user');
-      opcUser.css('display') == 'block' ? opcUser.css({display: 'none'}) : opcUser.css({display: 'block'});
+      opcUser.css('display') == 'block' ? opcUser.fadeOut(50) : opcUser.fadeIn(50);
     });  
   
   }
@@ -44,7 +44,6 @@ export class UnavbarComponent implements OnInit, AfterViewInit {
     else{
       this.searchComponent.ngOnInit();
     }
-    
   }
 
   signOut(){
