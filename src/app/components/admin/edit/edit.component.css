@@ -54,15 +54,55 @@ form input[type="file"]{
     margin-top: 20px;
 }
 
-#table-container{
+thead{
+    display:block;
+    background-color: #212529;
+    color: white;
+    height: 50px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 12px rgba(0,0,0,0.3); 
+    background: rgb(170, 171, 172);
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    background: white;
+}
+
+thead th{
+    display: inline-block;
+    line-height: 50px;
+}
+
+thead th:first-child{
+    width: 30%;
+}
+
+thead th:nth-child(2){
+    width: 55%
+}
+
+thead th:nth-child(3){
+    width: 15%;
+}
+
+tbody{
     overflow-y:scroll;
-    height: 300px;
-    margin-top: 60px;
+    height: 400px;
+    display: block;
 }
 
 table{
     border-collapse: collapse;
-    width: 100%;
+    /* width: 100%; */
     text-align: center;
     color: #212529;
     cursor: pointer;
@@ -77,8 +117,17 @@ table tr:hover{
     background-color: rgba(204, 200, 200, .8);
 }
 
-table tr td:nth-child(even){
-    width: 50%;
+table tr td:first-child{
+    width: 30%;
+}
+
+table tr td:nth-child(3){
+    width: 15%;
+}
+
+table td{
+    height: 70px;
+    border-right: 1px solid #DEE2E6;
 }
 
 form{
@@ -86,6 +135,10 @@ form{
     margin:0;
 }
 form #nombre{
+    width: 70%;
+}
+
+form #name{
     width: 70%;
 }
 

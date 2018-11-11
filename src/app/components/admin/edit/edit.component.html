@@ -5,59 +5,47 @@
 <div id="content">
     <div id="table-container">
         <table>
-            <tr data-img-url="../../../assets/img/food1.jpg" data-checked="1">
-                <td>Comida 1</td>
-                <td>Descripción Comida 1. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                <td>200 Bs S</td>
-            </tr>
-            <tr data-img-url="food2.jpg" data-checked="0">
-                <td>Comida 2</td>
-                <td>Descripción Comida 2. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                <td>150 Bs S</td>
-            </tr>  
-            <tr data-img-url="food3.jpg" data-checked="1">
-                <td>Comida 3</td>
-                <td>Descripción Comida 3. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                <td>660 Bs S</td>
-            </tr>
-            <tr data-img-url="food4.jpg" data-checked="1">
-                <td>Comida 4</td>
-                <td>Descripción Comida 4. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                <td>350 Bs S</td>
-            </tr>
-            <tr data-img-url="food5.jpg" data-checked="0">
-                <td>Comida 5</td>
-                <td>Descripción Comida 4. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                <td>170 Bs S</td>
-            </tr>
+            <thead>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+            </thead>
+            <tbody>
+                <tr (click)="setUpForm(comida)" *ngFor="let comida of comidas">
+                    <td>{{ comida.name }}</td>
+                    <td>{{ comida.desc }}</td>
+                    <td>${{ comida.price }}</td>
+                </tr>
+            </tbody>
+            
         </table>
     </div>
 
-    <form>
+    <form (ngSubmit)="editar()" id="foodForm">
         <div class="form-group">
             <label for="nombre">Nombre del producto</label>
-            <input class="form-control" type="text" name="nombre" id="nombre" required disabled>  
+            <input [(ngModel)]="comidaForm.name" class="form-control" type="text" name="name" id="name" required disabled>  
         </div>
         
         
         <div class="form-group">
             <label for="desc">Descripción</label>
-            <textarea class="form-control" name="desc" id="desc" style="resize: none; width: 100%;" require disabled></textarea>
+            <textarea [(ngModel)]="comidaForm.desc" class="form-control" name="desc" id="desc" style="resize: none; width: 100%;" required disabled></textarea>
         </div>
 
         <div class="form-group">
             <label for="precio">Precio</label>
-            <input class="form-control" type="text" id="precio" name="precio" require disabled>
+            <input [(ngModel)]="comidaForm.price" class="form-control" type="text" id="price" name="price" required disabled>
         </div>
 
 
         <div class="form-group">
             <label for="modificable">Modificable</label>
-            <input type="checkbox" id="modificable" checked disabled>
+            <input type="checkbox" id="modificable" name="modificable" disabled>
         </div>
 
         <div id="button-group">
-            <button type="submit" class="btn btn-primary" disabled>Aceptar</button>
+            <button type="submit" class="btn btn-primary" disabled>Editar</button>
         </div>
 
         <div id="food_image"></div>
