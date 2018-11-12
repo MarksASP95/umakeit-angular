@@ -57,16 +57,17 @@ export class EditComponent implements OnInit {
         name: comida.name,
         desc: comida.desc,
         price: parseFloat(comida.price),
-        modificable: $('#modificable').prop('checked'),
         $id: comida.id,
         img: comida.img
     }
 
-    $('#modificable').prop('checked', comida.avaiable);
+    $('#modificable').prop('checked', comida.modificable);
 
   }
 
   editar(){
+
+    this.comidaForm["modificable"] = $('#modificable').prop('checked');
 
     this.comidaService.updateComida(this.comidaForm as Comida)
         .then(() => {
