@@ -102,10 +102,18 @@ tbody{
 
 table{
     border-collapse: collapse;
-    /* width: 100%; */
+    width: 100%;
     text-align: center;
     color: #212529;
     cursor: pointer;
+}
+
+#table-container{
+    max-width: 600px;
+}
+
+#table-container, form{
+    margin: 40px 20px 40phx 20px;
 }
 
 table tr{
@@ -116,6 +124,7 @@ table tr{
 table tr:hover{
     background-color: rgba(204, 200, 200, .8);
 }
+
 
 table tr td:first-child{
     width: 30%;
@@ -133,9 +142,6 @@ table td{
 form{
     position: relative;
     margin:0;
-}
-form #nombre{
-    width: 70%;
 }
 
 form #name{
@@ -164,11 +170,17 @@ form #name{
     }
 }
 
+@media (max-width: 465px){
+    form #name{
+        width: 55%;
+    }
+}
+
 @media (max-width: 400px){
     #food_image{
         display: none;
     }
-    form #nombre{
+    form #name{
         width: 100%;
     }
 }
@@ -180,7 +192,7 @@ form #name{
     tr{
         height: 50px;
     }
-    tr td:nth-child(2){
+/*     tr td:nth-child(2){
         display:none;
-    }
+    } */
 }
