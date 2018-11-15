@@ -56,8 +56,6 @@ export class ComidaService {
   }
 
   addComida(comida: Comida){
-    
-
     return this.db.collection('comidas').add({
       name: comida.name,
       desc: comida.desc,
@@ -69,13 +67,18 @@ export class ComidaService {
   }
 
   updateComida(comida: Comida){
-    return this.db.collection('comidas').doc(comida.$id).set({
+    return this.db.collection('comidas').doc(comida.$id).update({
       name: comida.name,
       desc: comida.desc,
       price: comida.price,
       modificable: comida.modificable,
-      img: comida.img
     })
+  }
+
+  toggleAvaiable(id: string, avaiable: boolean){
+    return this.db.collection('comidas').doc(id).update({
+      avaiable: !avaiable
+    });
   }
 
   deleteComida($id: string){
