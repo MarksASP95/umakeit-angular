@@ -1,0 +1,41 @@
+<app-unavbar></app-unavbar>
+
+<table class="table">
+  <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Tamaño</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio / Unidad</th>
+          <th scope="col">Total</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let comida of comidas">
+          <th scope="row">{{ comida.index + 1 }}</th>
+          <td>{{ comida.name }}</td>
+          <td *ngIf="comida.mode !== ''; else nosize">{{ comida.mode }}</td>
+          <ng-template #nosize><td>---</td></ng-template>
+          <td>{{ comida.amount }}</td>
+          <td>${{ comida.price }}</td>
+          <td>${{ comida.price * comida.amount }}</td>
+      </tr>
+  </tbody>
+</table>
+
+<div id="content">
+<form>
+  <h4>¿A dónde quieres que enviemos esto?</h4>
+  <textarea placeholder="Escribe la dirección..." name="address" rows="5" required></textarea>
+</form>
+
+<h2>Total a pagar:</h2>
+<h3>${{ total }}<span>,00</span></h3>
+
+<div id="paypal-stuff">
+  <img src="img/paypal.png" alt="paypal_logo">
+</div>
+</div>
+
+<a class="btn btn-success" href="#">Comprar <i class="fas fa-check"></i></a>
