@@ -1,39 +1,23 @@
+<app-unavbar></app-unavbar>
+
 <h2>Habilitar o deshabilitar productos</h2>
+<small>Los items en rojo son productos no disponibles</small>
 
     <div id="table-container">
-        <form onsubmit="success()" id="prods">
             <table>
-                <tr data-img-url="food1.jpg" data-checked="1">
-                    <td>Comida 1</td>
-                    <td>Descripción Comida 1. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                    <td>200 Bs S</td>
-                    <td><input type="checkbox" checked></td>
-                </tr>
-                <tr data-img-url="food2.jpg" data-checked="0">
-                    <td>Comida 2</td>
-                    <td>Descripción Comida 2. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                    <td>150 Bs S</td>
-                    <td><input type="checkbox" checked></td>
-                </tr>  
-                <tr data-img-url="food3.jpg" data-checked="1">
-                    <td>Comida 3</td>
-                    <td>Descripción Comida 3. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                    <td>660 Bs S</td>
-                    <td><input type="checkbox" checked></td>
-                </tr>
-                <tr data-img-url="food4.jpg" data-checked="1">
-                    <td>Comida 4</td>
-                    <td>Descripción Comida 4. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                    <td>350 Bs S</td>
-                    <td><input type="checkbox" checked></td>
-                </tr>
-                <tr data-img-url="food5.jpg" data-checked="0">
-                    <td>Comida 5</td>
-                    <td>Descripción Comida 4. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                    <td>170 Bs S</td>
-                    <td><input type="checkbox" checked></td>
-                </tr>
+                <thead>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                </thead>
+                <tbody>
+                    <tr (click)="getInfo(comida)" [ngClass]="comida.avaiable == false ? 'not-avaiable':'avaiable'" *ngFor="let comida of comidas">
+                        <td>{{ comida.name }}</td>
+                        <td>{{ comida.desc }}</td>
+                        <td>${{ comida.price }}</td>
+                    </tr>
+                </tbody>
+
             </table>
-        </form>
     </div>
-    <button class="btn btn-primary" form="prods">Aceptar</button>
+    <button class="btn btn-primary" (click)="execute()">{{ buttonText }}</button>
