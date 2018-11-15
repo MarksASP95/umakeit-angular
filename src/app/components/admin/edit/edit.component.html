@@ -1,17 +1,18 @@
 <app-unavbar></app-unavbar>
 
 <h2>Editar productos</h2>
+<small>Los items en rojo son productos no disponibles</small>
 
 <div id="content">
     <div id="table-container">
         <table>
-            <thead>
+            <thead> 
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Precio</th>
             </thead>
             <tbody>
-                <tr (click)="setUpForm(comida)" *ngFor="let comida of comidas">
+                <tr [ngClass]="comida.avaiable == false ? 'not-avaiable':'.null-class'" (click)="setUpForm(comida)" *ngFor="let comida of comidas">
                     <td>{{ comida.name }}</td>
                     <td>{{ comida.desc }}</td>
                     <td>${{ comida.price }}</td>
