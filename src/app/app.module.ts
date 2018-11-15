@@ -42,6 +42,7 @@ import { AuthGuard } from './services/auth.guard';
 import { AdminGuard } from './services/auth.adminguard';
 import { ResolveGuard } from './services/resolve.guard';
 import { ResolveUnavbar } from './services/resolve.unavbar';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -86,6 +87,14 @@ const routes: Routes = [
     component: ChangePasswordComponent
   },
   {
+    path: 'checkout',
+    canActivate: [AuthGuard],
+    resolve: {
+      userInfo: ResolveUnavbar
+    },
+    component: CheckoutComponent
+  },
+  {
     path: 'admin',
     canActivate: [AdminGuard],
     resolve: {
@@ -108,6 +117,10 @@ const routes: Routes = [
       {
         path: 'editar',
         component: EditComponent
+      },
+      {
+        path: 'existencias',
+        component: HabDesComponent
       }
     ]
   }
@@ -127,7 +140,8 @@ const routes: Routes = [
     AddComponent,
     HabDesComponent,
     ChangePasswordComponent,
-    EditComponent
+    EditComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
