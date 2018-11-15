@@ -62,7 +62,15 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
       //this.updateUserData(res.user.email);
-      this.router.navigate(['dashboard']);
+      let nextRoute;
+      if(localStorage.next && localStorage.next !== 'dashboard'){
+        nextRoute = localStorage.next;
+      }
+      else{
+        nextRoute = 'dashboard';
+      }
+      localStorage.next = 'dashboard';
+      this.router.navigate([nextRoute]);
       setTimeout(() => this.toastr.success('Bienvenido'), 500);
     })
     .catch(() => {
