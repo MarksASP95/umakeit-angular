@@ -27,7 +27,7 @@ export class AddComponent implements OnInit {
   c_price: string;
   c_modificable: boolean;
 
-  constructor(private imgStorageService: ImgStorageService, 
+  constructor(public imgStorageService: ImgStorageService, 
               private comidaService: ComidaService,
               private toastr: ToastrService) { }
 
