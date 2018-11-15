@@ -2,17 +2,18 @@
   <a routerLink="/"><h1>uMakeIt!</h1></a>
 <div id="up-bar-funcs">
 <form *ngIf="showSearch" name="search" (ngSubmit)="submitSearch(searchText)">
-        <input [(ngModel)]="searchText" name="search" type="text" placeholder="Buscar producto...">
-    </form>
-    <ng-container *ngIf="route.snapshot.data.userInfo.username !== null; then authenticated else guest"></ng-container>
-    <ng-template #guest>
-        <a id="btn" style="color:white;" routerLink="/auth">
-            Entrar / Registrarse
-        </a>
-    </ng-template>
-    <ng-template #authenticated>
-        <span class="username">{{route.snapshot.data.userInfo.username}}<i class="fas fa-angle-down"></i></span>
-    </ng-template>
+    <input [(ngModel)]="searchText" name="search" type="text" placeholder="Buscar producto...">
+</form>
+<a *ngIf="showCart" style="color: white;" routerLink="/cart"><i class="fas fa-shopping-cart"></i></a>
+<ng-container *ngIf="route.snapshot.data.userInfo.username !== null; then authenticated else guest"></ng-container>
+<ng-template #guest>
+    <a id="btn" style="color:white;" routerLink="/auth">
+        Entrar / Registrarse
+    </a>
+</ng-template>
+<ng-template #authenticated>
+    <span class="username">{{route.snapshot.data.userInfo.username}}<i class="fas fa-angle-down"></i></span>
+</ng-template>
 
 </div>
 
@@ -20,9 +21,8 @@
     <ul>
         <li><a routerLink="/cambiar_clave">Cambio de clave</a></li>
         <li><a href="#">Compras</a></li>
-        <li><a routerLink="/cart">Orden</a></li>
-        <li><a style="cursor:pointer;" (click)="signOut()">Salir</a></li>
         <li *ngIf="route.snapshot.data.userInfo.isadmin"><a routerLink="/admin">ADMIN</a></li>
+        <li><a style="cursor:pointer;" (click)="signOut()">Salir</a></li>
     </ul>
   </div>
 </div>
