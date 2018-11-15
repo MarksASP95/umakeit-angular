@@ -16,7 +16,7 @@ export class ChangePasswordComponent implements OnInit {
   newPasswordRep: string;
   user: any;
 
-  constructor(private router: Router, private changePasswordService: ChangePasswordService, private toastr: ToastrService) { }
+  constructor(private router: Router, public changePasswordService: ChangePasswordService, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
