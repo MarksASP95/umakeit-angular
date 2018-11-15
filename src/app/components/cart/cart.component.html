@@ -20,14 +20,22 @@
     </div>
   </div>
 
+<ng-container *ngIf="getLocalStorage() !== '[]'; else showcomidas">
+  <small>Precio / Unidad</small>
+</ng-container>
+
+
 <div id="menu" >
-    <ng-container *ngFor="let comida of comidas">
+    <ng-container *ngIf="getLocalStorage() == '[]'; else showcomidas">
+      <h2 style="color: white;">El carrito está vacío.</h2>
+    </ng-container>
+    <ng-container #showcomidas *ngFor="let comida of comidas">
         <div class="card">
             <div class="img-container">
                 <img class="card-img-top" [src]="comida.img" alt="Card image cap">
             </div>
             <div class="card-body">
-              <h5 class="card-title">{{comida.name}} - <strong style="color:green; display:block; text-align: center; font-size: 1.3em;">${{comida.price}}</strong></h5>
+              <h5 class="card-title">{{comida.name}} <span style="color:rgba(146, 145, 145, 0.925)" *ngIf="comida.mode !== ''">({{ comida.mode }})</span> <span *ngIf="comida.amount > 1">x{{ comida.amount }}</span> <strong style="color:green; display:block; text-align: center; font-size: 1.3em;">${{comida.price}}</strong></h5>
               <div style="margin-top:30px">
                   <a (click)="openModal(comida)" class="btn btn-primary">Ver</a>
                   <button (click)="outOfCart(comida)" type="button" style="margin-top:10px;" class="btn btn-danger">Sacar del carrito</button>
@@ -37,4 +45,4 @@
     </ng-container>
   </div>
 
-<a class="btn btn-success" href="caja.html" role="button">Ir a Caja <i class="fas fa-sign-in-alt"></i></a>
+<a *ngIf="getLocalStorage() !== '[]'" class="btn btn-success" routerLink="/checkout" role="button" id="to-checkout-btn">Ir a Caja <i class="fas fa-sign-in-alt"></i></a>
