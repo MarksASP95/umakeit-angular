@@ -9,6 +9,7 @@ import { ComidainfoComponent } from '../comidainfo/comidainfo.component';
 
 // models
 import { Comida } from '../../models/comida';
+import { ActivationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -19,16 +20,23 @@ export class CartComponent implements OnInit {
 
   comidas;
   modalRef: BsModalRef;
+  showcomidas: any;
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    if(this.route.snapshot.data.userInfo.username == null){
+      localStorage.setItem('next','checkout');
+    }
+
     this.comidas = JSON.parse(localStorage.getItem('cart'));
-    console.log(this.comidas);
 
     $(document).on('click', '#menu .btn-danger', function(){
       $(this).parents('.card').fadeOut();
   })
+
+    console.log(this.comidas);
   }
 
   outOfCart(comida){
@@ -50,15 +58,20 @@ export class CartComponent implements OnInit {
     
   }
 
-  openModal(comida: Comida){
+  openModal(comida){
     this.modalRef = this.modalService.show(ComidainfoComponent,{
       initialState:{
         title: comida.name,
         img: comida.img,
         bodyText: comida.desc,
-        price: comida.price
+        price: comida.price,
+        size: comida.mode
       }
     });
+  }
+
+  getLocalStorage(){
+    return localStorage.cart;
   }
 
 }
