@@ -14,7 +14,7 @@ import { Comida } from 'src/app/models/comida';
 export class EditComponent implements OnInit {
 
   comidas = [];
-  comidaForm = {};
+  comidaForm: Comida = {};
 
   constructor(private comidaService: ComidaService, private toastr: ToastrService) { }
 
@@ -24,7 +24,7 @@ export class EditComponent implements OnInit {
         this.comidas = comidas.map(snap => {
           let obj = {
             id: snap.payload.doc.id,
-            ...snap.payload.doc.data()
+            ...snap.payload.doc.data()  
           }
           return obj;
         });
