@@ -26,10 +26,11 @@ export class UnavbarComponent implements OnInit, AfterViewInit {
 
   @Input() showSearch: boolean;
   @Input() showUser: boolean;
+  @Input() showCart: boolean = true;
   username: string;
   searchText: string;
 
-  constructor(public router: Router, public comidaService: ComidaService, public searchComponent: SearchComponent, public auth: AuthService, private route: ActivatedRoute) { }
+  constructor(public router: Router, public comidaService: ComidaService, public searchComponent: SearchComponent, public auth: AuthService, public route: ActivatedRoute) { }
 
   ngOnInit() {
     //console.log(this.route.snapshot.data); 
