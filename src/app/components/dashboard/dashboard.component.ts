@@ -46,7 +46,8 @@ export class DashboardComponent implements OnInit {
         title: comida.name,
         img: comida.img,
         bodyText: comida.desc,
-        price: comida.price
+        price: comida.price,
+        modificable: comida.modificable
       }
     });
   }
