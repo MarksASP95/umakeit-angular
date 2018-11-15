@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left">{{title}} - <strong style="color:green;">${{price}}</strong></h4>
+    <h4 class="modal-title pull-left">{{title}} <span *ngIf="size" style="color:rgba(146, 145, 145, 0.925)">({{ size }})</span> - <strong style="color:green;">${{price}}</strong></h4>
     
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
@@ -9,7 +9,7 @@
       <img [src]="img" alt=""> 
     <p>{{bodyText}}</p>
     <form>
-      <select id="size">
+      <select (change)="changeSize($event.target.value)" *ngIf="modificable" id="size">
         <option value="Grande">Grande</option>
         <option value="Mediano" selected>Mediano</option>
         <option value="Pequeño">Pequeño</option>
