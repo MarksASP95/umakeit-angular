@@ -1,0 +1,15 @@
+#success{
+    border: 1px solid white;
+    width: 70%;
+}
+
+h2{
+    color: white;
+    font-size: 2em;
+    text-align: center;
+}
+
+img{
+    display: block;
+    margin: 40px auto;
+}
