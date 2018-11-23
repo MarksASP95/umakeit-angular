@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 declare let paypal: any;
 
@@ -16,7 +17,7 @@ export class CheckoutComponent implements OnInit {
   finalAmount: number = 10;
   paypalLoad: boolean = true;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
 
@@ -48,6 +49,7 @@ export class CheckoutComponent implements OnInit {
       return actions.payment.execute().then(payment => {
         // do something when payment is successful
         console.log('PAID');
+        this.router.navigate(['/ready']);
       })
     }
   };
