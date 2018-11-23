@@ -5,8 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment';
 
-import { CoreModule } from './core/core.module';
-
 // ngx-toastr
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,6 +41,7 @@ import { AdminGuard } from './services/auth.adminguard';
 import { ResolveGuard } from './services/resolve.guard';
 import { ResolveUnavbar } from './services/resolve.unavbar';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReadyComponent } from './components/ready/ready.component';
 
 const routes: Routes = [
   {
@@ -95,6 +94,14 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
+    path: 'ready',
+    //canActivate: [AuthGuard],
+    /* resolve: {
+      userInfo: ResolveUnavbar
+    }, */
+    component: ReadyComponent
+  },
+  {
     path: 'admin',
     canActivate: [AdminGuard],
     resolve: {
@@ -141,7 +148,8 @@ const routes: Routes = [
     HabDesComponent,
     ChangePasswordComponent,
     EditComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ReadyComponent
   ],
   imports: [
     BrowserModule,
@@ -151,7 +159,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     TabsModule.forRoot(),
     FormsModule,
-    CoreModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
