@@ -13,6 +13,7 @@ import { ImgStorageService } from '../../services/img-storage.service';
 
 // models
 import { Comida } from 'src/app/models/comida';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,23 +27,29 @@ export class DashboardComponent implements OnInit {
 
   constructor(private comidaService: ComidaService, 
               private modalService: BsModalService,
-              private imgStorageService: ImgStorageService) { }
+              private imgStorageService: ImgStorageService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.comidaService.getComidas().subscribe(comidas => {
       this.comidas = comidas.map(snap => {
         let obj = {
-          id: snap.payload.doc.id,
+          $id: snap.payload.doc.id,
           ...snap.payload.doc.data()
         }
         return obj;
       });
     });
+
+    /* this.route.snapshot.data.userInfo.subscribe(user => {
+      console.log(user.authState.uid);
+    }) */
   }
 
   openModal(comida: Comida){
     this.modalRef = this.modalService.show(ComidainfoComponent,{
       initialState:{
+        uid: comida.$id,
         title: comida.name,
         img: comida.img,
         bodyText: comida.desc,
