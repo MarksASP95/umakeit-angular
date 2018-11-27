@@ -20,7 +20,7 @@
   <div id="opc-user">
     <ul>
         <li><a routerLink="/cambiar_clave">Cambio de clave</a></li>
-        <li><a href="#">Compras</a></li>
+        <li><a routerLink="/history">Compras</a></li>
         <li *ngIf="route.snapshot.data.userInfo.isadmin"><a routerLink="/admin">ADMIN</a></li>
         <li><a style="cursor:pointer;" (click)="signOut()">Salir</a></li>
     </ul>
