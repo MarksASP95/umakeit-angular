@@ -1,8 +1,10 @@
+// angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+// environment
 import { environment } from '../environments/environment';
 
 // ngx-toastr
@@ -24,10 +26,6 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UnavbarComponent } from './components/unavbar/unavbar.component';
 import { ComidainfoComponent } from './components/comidainfo/comidainfo.component';
-
-// services
-import { AdminService } from './services/admin.service';
-import { ComidaService } from './services/comida.service';
 import { LogRegComponent } from './components/log-reg/log-reg.component';
 import { SearchComponent } from './components/search/search.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -36,12 +34,20 @@ import { AddComponent } from './components/admin/add/add.component';
 import { HabDesComponent } from './components/admin/hab-des/hab-des.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { EditComponent } from './components/admin/edit/edit.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReadyComponent } from './components/ready/ready.component';
+
+// services
+import { AdminService } from './services/admin.service';
+import { ComidaService } from './services/comida.service';
 import { AuthGuard } from './services/auth.guard';
 import { AdminGuard } from './services/auth.adminguard';
 import { ResolveGuard } from './services/resolve.guard';
 import { ResolveUnavbar } from './services/resolve.unavbar';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ReadyComponent } from './components/ready/ready.component';
+import { ResolveUidService } from './services/resolve-uid.service';
+import { HistorialComponent } from './components/historial/historial.component';
+import { RegAdminComponent } from './components/admin/reg-admin/reg-admin.component'
+
 
 const routes: Routes = [
   {
@@ -95,11 +101,19 @@ const routes: Routes = [
   },
   {
     path: 'ready',
-    //canActivate: [AuthGuard],
-    /* resolve: {
+    canActivate: [AuthGuard],
+    resolve: {
       userInfo: ResolveUnavbar
-    }, */
+    },
     component: ReadyComponent
+  },
+  {
+    path: 'history',
+    canActivate: [AuthGuard],
+    resolve: {
+      userInfo: ResolveUnavbar
+    },
+    component: HistorialComponent
   },
   {
     path: 'admin',
@@ -128,6 +142,10 @@ const routes: Routes = [
       {
         path: 'existencias',
         component: HabDesComponent
+      },
+      {
+        path: 'registrar-admin',
+        component: RegAdminComponent
       }
     ]
   }
@@ -149,7 +167,9 @@ const routes: Routes = [
     ChangePasswordComponent,
     EditComponent,
     CheckoutComponent,
-    ReadyComponent
+    ReadyComponent,
+    HistorialComponent,
+    RegAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -171,7 +191,8 @@ const routes: Routes = [
     AuthGuard,
     AdminGuard,
     ResolveGuard,
-    ResolveUnavbar
+    ResolveUnavbar,
+    ResolveUidService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ComidainfoComponent]
