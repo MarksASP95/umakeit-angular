@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router, Resolve } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthService } from './auth.service';
 import * as _ from 'lodash';
+import * as firebase from 'firebase/app';
 import { take, map, tap } from 'rxjs/operators';
 
 @Injectable()
@@ -14,7 +15,6 @@ export class ResolveUnavbar implements Resolve<any> {
     state: RouterStateSnapshot): Observable<boolean> | boolean {
 
       let obj = {};
-
       return this.auth.user.pipe(
         take(1),
         map(user => {
