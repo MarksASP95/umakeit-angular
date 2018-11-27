@@ -103,13 +103,13 @@ export class AuthService {
 
   }
 
-  async signUp(email: string, password: string, username: string){
+  async signUp(email: string, password: string, username: string, isadmin: boolean){
 
     await this.userService.usernameIsAvaiable(username)
       .then(() => {
         this.afAuth.auth.createUserWithEmailAndPassword(email, password)
         .then(user => {
-          this.userService.addUser(email, user.user.uid, username)
+          this.userService.addUser(email, user.user.uid, username, isadmin)
             .then(() => {
               this.toastr.success('Usuario creado\nRedireccionando...','Éxito');
               setTimeout(() => this.router.navigate(['dashboard']), 2500);
