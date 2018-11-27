@@ -38,11 +38,11 @@
               <h5 class="card-title">{{comida.name}} <span style="color:rgba(146, 145, 145, 0.925)" *ngIf="comida.mode !== ''">({{ comida.mode }})</span> <span *ngIf="comida.amount > 1">x{{ comida.amount }}</span> <strong style="color:green; display:block; text-align: center; font-size: 1.3em;">${{comida.price}}</strong></h5>
               <div style="margin-top:30px">
                   <a (click)="openModal(comida)" class="btn btn-primary">Ver</a>
-                  <button (click)="outOfCart(comida)" type="button" style="margin-top:10px;" class="btn btn-danger">Sacar del carrito</button>
+                  <button (click)="outOfCart(comida.uid)" type="button" style="margin-top:10px;" class="btn btn-danger">Sacar del carrito</button>
               </div>
             </div>
         </div>
     </ng-container>
   </div>
 
-<a *ngIf="getLocalStorage() !== '[]'" class="btn btn-success" routerLink="/checkout" role="button" id="to-checkout-btn">Ir a Caja <i class="fas fa-sign-in-alt"></i></a>
+<a *ngIf="getLocalStorage() !== '[]'" class="btn btn-success" (click)="goToCheckout()" role="button" id="to-checkout-btn">Ir a Caja <i class="fas fa-sign-in-alt"></i></a>
