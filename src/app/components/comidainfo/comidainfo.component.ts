@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ComidainfoComponent implements OnInit {
 
+  uid: string;
   title: string;
   bodyText: string;
   price: string;
@@ -39,7 +40,7 @@ export class ComidainfoComponent implements OnInit {
     }
 
     var a = [];
-    // Parse the serialized data back into an aray of objects
+    // Parse the serialized data back into an array of objects
     a = JSON.parse(localStorage.getItem('cart'));
     console.log(a.length);
     let i = 0;
@@ -47,7 +48,7 @@ export class ComidainfoComponent implements OnInit {
 
     if(a.length > 0){
       while(!alreadyIn && i<a.length){
-        if(this.title === a[i].name && (this.select === a[i].mode || this.select === undefined)){
+        if(this.uid === a[i].uid && (this.select === a[i].mode || this.select === undefined)){
           alreadyIn = true;
           break;
         }
@@ -59,11 +60,11 @@ export class ComidainfoComponent implements OnInit {
       }
       else{
         // Push the new data (whether it be an object or anything else) onto the array
-        a.push({name: this.title, price: this.price, amount: 1, mode: this.select, img: this.img, index:a.length});
+        a.push({uid: this.uid, amount: 1, mode: this.select, index:a.length});
       }
     }
     else{
-      a.push({name: this.title, price: this.price, amount: 1, mode: this.select, img: this.img, index:a.length});
+      a.push({uid: this.uid, amount: 1, mode: this.select, index:a.length});
     }
 
     // Re-serialize the array back into a string and store it in localStorage
