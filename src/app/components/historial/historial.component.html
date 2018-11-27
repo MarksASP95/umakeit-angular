@@ -1,0 +1,32 @@
+<app-unavbar></app-unavbar>
+
+<div *ngFor="let cart of cartsDisplay; let i = index" class="table-container">
+    <h2>{{ cart.time }}</h2>
+  <table class="table" id="table{{i}}">
+      <thead>
+          <th>Productos</th>
+          <th>Tamaño</th>
+          <th>Cantidad</th>
+          <th>Precio/Unidad</th>
+      </thead>
+      <tbody>
+          <tr [attr.data-uid]="producto.uid" *ngFor="let producto of cart.foods; let i = index">
+            <td>{{ producto.name }}</td>
+            <td *ngIf="producto.mode !== ''; else nosize">
+                <select name="mode">
+                    <option [value]="producto.mode" selected>{{ producto.mode }}</option>
+                    <option [value]="getOtherOptions(producto.mode)[0]">{{getOtherOptions(producto.mode)[0]}}</option>
+                    <option [value]="getOtherOptions(producto.mode)[1]">{{getOtherOptions(producto.mode)[1]}}</option>
+                </select>
+            </td>
+            <ng-template #nosize><td>---</td></ng-template>
+            <td>{{ producto.amount }}</td>
+            <td>${{ producto.price }}</td>
+          </tr>
+      </tbody>
+  </table>
+  <button (click)="recomprar(i)" class="btn btn-success">Recomprar</button>
+</div>
+<button class="btn btn-primary"></button>
+
+<!-- [ngClass]="comida.avaiable == false ? 'not-avaiable':'avaiable'" *ngFor="let producto of cart.cart" -->

@@ -1,0 +1,70 @@
+#content{
+    width: 70%;
+    margin:15px auto;
+}
+
+.table{
+    text-align: center;
+    margin: 0 auto;
+    width: 70%;
+    margin-top:30px;
+    margin-bottom: 15px;
+}
+
+.table tr th, .table td{
+    vertical-align: middle;
+}
+
+.table tbody tr{
+    background-color: white;
+}
+
+.table thead {
+    color: white;
+    background-color: #212529;
+}
+
+.fa-check{
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-success{
+    display: block;
+    width:100px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+
+h2, h3, h4{
+    color: white;
+    text-align: center;
+}
+
+h3 span{
+    font-size: .6em;
+}
+
+
+
+@media (max-width: 645px){
+    #content{
+        width:90%;
+    }
+    .table{
+        width: 100%;
+    }
+}
+
+@media (max-width: 377px){
+    table{
+        font-size: .8em;
+    }
+}
+
+@media (max-width: 328px){
+    table{
+        font-size: .6em;
+    }
+}
