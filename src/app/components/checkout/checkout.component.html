@@ -12,8 +12,8 @@
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let comida of comidas">
-          <th scope="row">{{ comida.index + 1 }}</th>
+      <tr *ngFor="let comida of comidas; let i = index">
+          <th scope="row">{{ i+1 }}</th>
           <td>{{ comida.name }}</td>
           <td *ngIf="comida.mode !== ''; else nosize">{{ comida.mode }}</td>
           <ng-template #nosize><td>---</td></ng-template>
@@ -31,11 +31,12 @@
 </form>
 
 <h2>Total a pagar:</h2>
-<h3>${{ total }}<span>,00</span></h3>
+<h3 *ngIf="total !== 0">${{ total }}<span>,00</span></h3>
 
 <div id="paypal-stuff">
-  <div id="paypal-checkout-btn"></div>   
+  <div id="paypal-checkout-btn"></div>
 </div>
+<button (click)="simularCompra()" style="display:block; margin:20px auto;" class="btn">Simular compra</button> 
 </div>
 
 <!-- <a class="btn btn-success" href="#">Comprar <i class="fas fa-check"></i></a> -->
