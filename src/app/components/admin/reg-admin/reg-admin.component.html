@@ -1,0 +1,20 @@
+<app-unavbar [showSearch]="false"></app-unavbar>
+
+<form name="register" (ngSubmit)="submitRegister()">
+  <h2 style="text-align: center">Registro de administrador</h2>
+  <div class="form-group">
+      <label for="inputUser">Email</label>
+      <input  [(ngModel)]="user.email" name="email" class="form-control" id="inputUser" placeholder="Ingresa tu correo electrónico" #email="ngModel" required>
+          
+  </div>
+  <div class="form-group">
+      <label for="inputUser">Usuario</label>
+      <input  [(ngModel)]="user.username" name="username" class="form-control" placeholder="Crea un nombre de usuario" required>
+      <small id="emailHelp" class="form-text text-muted">Este es el nombre con el que entrarás al sistema.</small>
+  </div>
+  <div class="form-group">
+      <label for="exampleInputPassword1">Contraseña</label>
+      <input  [(ngModel)]="user.password" name="password" type="password" class="form-control" placeholder="Crea una contraseña" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Registrarme</button>
+</form>

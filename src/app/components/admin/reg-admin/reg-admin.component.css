@@ -1,0 +1,46 @@
+h1{
+    display: block;
+    text-align: center;
+}
+
+#forms-container {
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+    height: 70%;
+}
+
+form {
+    width: 350px;
+    min-width: 220px;
+    border: 2px solid black;
+    padding: 30px;
+    margin: 0 auto;
+    margin-top:30px;
+    border-radius: 10px;
+    background-color: rgba(204, 200, 200, .8);
+}
+
+
+.form-control {
+    border: 1px solid black;
+}
+
+.btn-primary {
+    display: block;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 500px){
+    #forms-container{
+        width: 90%;
+    }
+    form{
+        width: 100%;
+    }
+}
