@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ComidaService } from 'src/app/services/comida.service';
+import { UserService } from 'src/app/services/user.service';
+
+import * as $ from 'jquery';
 
 declare let paypal: any;
 
@@ -8,7 +12,7 @@ declare let paypal: any;
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit{
 
   comidas;
   total: number = 0;
@@ -17,16 +21,58 @@ export class CheckoutComponent implements OnInit {
   finalAmount: number = 10;
   paypalLoad: boolean = true;
 
-  constructor(private router: Router) { }
+/*   userUid: string; */
+
+  constructor(private router: Router,
+              private comidaService: ComidaService,
+              private route: ActivatedRoute,
+              private userService: UserService) { }
 
   ngOnInit() {
 
-    this.comidas = JSON.parse(localStorage.getItem('cart'));
+    this.comidas = JSON.parse(localStorage.getItem('checkoutcart'));
 
-    for(let i = 0; i < this.comidas.length; i++){
-      this.total += this.comidas[i].price * this.comidas[i].amount;
-    }
+    let arrayUids = this.getComidasArray(this.comidas);
 
+    let queryResult = this.comidaService.getCartComidas(arrayUids);
+
+    queryResult.subscribe(comidas => {
+      this.comidas = comidas.map(snap => {
+        let obj = {
+          name: snap.result.name,
+          desc: snap.result.desc,
+          price: snap.result.price,
+          img: snap.result.img,
+          amount: snap.amount,
+          mode: snap.mode
+        }
+        return obj;
+      });
+    });
+   
+    setTimeout(() => {
+      let prices = document.querySelectorAll("table tr td:last-child");
+      for(let i = 0; i < prices.length; i++){
+        console.log(prices[i].innerHTML.substr(1));
+        this.total += Number.parseInt(prices[i].innerHTML.substr(1));
+      }
+      console.log(this.total);
+    }, 1000);
+
+  }
+
+  getComidasArray(cartObject: Object[]){
+    let array = [];
+    cartObject.forEach(product => {
+      let obj = {
+        uid: product.uid,
+        amount: product.amount,
+        mode: product.mode
+      }
+      array.push(obj);
+    });
+    //console.log(array);
+    return array;
   }
 
   paypalConfig =  {
@@ -48,8 +94,11 @@ export class CheckoutComponent implements OnInit {
     onAuthorize: (data, actions) => {
       return actions.payment.execute().then(payment => {
         // do something when payment is successful
-        console.log('PAID');
         this.router.navigate(['/ready']);
+        console.log('PAID');
+        //console.log(this.userUid);
+        this.userService.storeCart(this.route.snapshot.data.userInfo.username);
+        
       })
     }
   };
@@ -71,6 +120,13 @@ export class CheckoutComponent implements OnInit {
       scripttagElement.onload = resolve;
       document.body.appendChild(scripttagElement);
     });
+  }
+
+  simularCompra(){
+    this.router.navigate(['/ready']);
+    console.log('PAID');
+    //console.log(this.userUid);
+    this.userService.storeCart(this.route.snapshot.data.userInfo.username);
   }
 
 }
