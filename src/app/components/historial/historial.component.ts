@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComidaService } from 'src/app/services/comida.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-historial',
@@ -14,7 +15,8 @@ export class HistorialComponent implements OnInit {
   constructor(private userService: UserService,
     private route: ActivatedRoute,
     private comidaService: ComidaService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService) { }
 
   carts = [];
   cartsDisplay = [];
@@ -57,6 +59,7 @@ export class HistorialComponent implements OnInit {
               desc: snap.order.result.desc,
               price: snap.order.result.price,
               img: snap.order.result.img,
+              avaiable: snap.order.result.avaiable,
               amount: snap.order.amount,
               mode: snap.order.mode,
               uid: snap.order.uid
@@ -98,31 +101,48 @@ export class HistorialComponent implements OnInit {
 
     //let table = document.getElementById('table'+tableid);
     let tableRows = document.querySelectorAll("#table" + tableid + " tbody tr");
-
+    let canRebuy = true;
     for(let i = 0; i < tableRows.length; i++){
-
-      let mode;
-      if(tableRows[i].children[1].innerHTML == "---"){
-        mode = '';
+      
+      if(tableRows[i].attributes['data-avaiable'].nodeValue == "false"){
+        this.toastr.error('Esta compra tiene productos no disponibles', 'Error');
+        canRebuy = false;
+        break;
       }
       else{
-        mode = tableRows[i].children[1].children[0].value;
+        let mode;
+        if(tableRows[i].children[2].innerHTML == "---"){
+          mode = '';
+        }
+        else{
+          mode = <HTMLElement> tableRows[i].children[2].children[0];
+          mode = mode.value;
+        }
+  
+        let tableRowInfo = {
+          uid: tableRows[i].attributes['data-uid'].nodeValue,
+          mode: mode,
+          amount: tableRows[i].children[3].innerHTML
+        };
+  
+        checkoutCart.push(tableRowInfo);
       }
-
-      let tableRowInfo = {
-        uid: tableRows[i].attributes['data-uid'].nodeValue,
-        mode: mode,
-        amount: tableRows[i].children[2].innerHTML
-      };
-
-      checkoutCart.push(tableRowInfo);
     }
-
-    //console.log(JSON.stringify(checkoutCart));
-    localStorage.checkoutcart = JSON.stringify(checkoutCart);
-    this.router.navigate(['/checkout']);
+    console.log(checkoutCart);
+    if(checkoutCart.length == 0 && canRebuy){
+      canRebuy = false;
+      this.toastr.error('¡No puedes comprar si no tienes productos!', 'Error');
+    }
+    else if(canRebuy){
+      //console.log(JSON.stringify(checkoutCart));
+      localStorage.checkoutcart = JSON.stringify(checkoutCart);
+      this.router.navigate(['/checkout']);
+    }
   }
 
+  removeRow(clickedBtn){
+    clickedBtn.parentNode.parentNode.remove();
+  }
   
 
 }

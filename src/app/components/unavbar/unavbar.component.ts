@@ -34,6 +34,19 @@ export class UnavbarComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     //console.log(this.route.snapshot.data); 
+    $(document).ready(function(){
+      $('body').css({overflow:"scroll"});
+
+      $('#menu-btn').on('click', function(){
+        $('#hidden-menu').css({left:0});
+        $('body').css({overflow:"hidden"});
+    });
+  
+    $('#close').on('click', function(){
+        $('#hidden-menu').css({left:'100%'});
+        $('body').css({overflow:"scroll"});
+    })
+    })
   }
   
   submitSearch(searchText: string){

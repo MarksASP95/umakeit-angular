@@ -65,13 +65,13 @@ export class CartComponent implements OnInit {
     //console.log(this.comidas);
   }
 
-  getComidasArray(cartObject: Object[]){
+  getComidasArray(cartObject){
     let array = [];
     cartObject.forEach(product => {
       let obj = {
-        uid: product.uid,
-        amount: product.amount,
-        mode: product.mode
+        uid: product['uid'],
+        amount: product['amount'],
+        mode: product['mode']
       }
       array.push(obj);
     });
@@ -121,6 +121,19 @@ export class CartComponent implements OnInit {
   goToCheckout(){
     localStorage.setItem('checkoutcart', this.getLocalStorage());
     this.router.navigate(['/checkout']);
+  }
+
+  getSizedPrice(precio, mode){
+    switch(mode){
+      case 'Mediano':
+        return Math.ceil(precio).toString();
+      case 'Grande':
+        return Math.ceil(precio*1.2).toString();
+      case 'Pequeño':
+        return Math.ceil(precio*0.8).toString();
+      case '':
+        return precio;
+    }
   }
 
 }

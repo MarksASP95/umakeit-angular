@@ -164,19 +164,17 @@ export class ComidaService {
     return this.db.collection('comidas').doc(uid).get();
   }
 
-  deleteComida($id: string){
 
+  addPedido(dataPedido){
+    return this.db.collection('pedidos').add({
+      foods: dataPedido.foods,
+      address: dataPedido.address,
+      time: dataPedido.time
+    });
+  }
+
+  getPedidos(){
+    return this.db.collection('pedidos').snapshotChanges();
   }
 
 }
-
-/*   getComidasSearch(comidaSearch: string){
-     this.comidas = this.db.collection('comidas').snapshotChanges().pipe(map(changes=> {
-      return changes.map(action => {
-          const data = action.payload.doc.data() as Comida;
-          return data;
-      });
-    }));
-    return this.comidas.pipe(map(arr => arr.filter( r => r.name. >= comidaSearch ))) 
-  //  this.comidas = this.db.collection('comidas', ref => ref.where("name", ">=", comidaSearch));
-  } */

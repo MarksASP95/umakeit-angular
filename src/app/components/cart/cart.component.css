@@ -21,8 +21,13 @@
     margin:5px;
 }
 
-small{
+#smallgroup{
+    margin: 0 auto;
     margin-top: 30px;
+}
+
+small{
+    
     font-style: italic;
     display: block;
     text-align: center;

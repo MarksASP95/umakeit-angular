@@ -46,7 +46,8 @@ import { ResolveGuard } from './services/resolve.guard';
 import { ResolveUnavbar } from './services/resolve.unavbar';
 import { ResolveUidService } from './services/resolve-uid.service';
 import { HistorialComponent } from './components/historial/historial.component';
-import { RegAdminComponent } from './components/admin/reg-admin/reg-admin.component'
+import { RegAdminComponent } from './components/admin/reg-admin/reg-admin.component';
+import { PedidosComponent } from './components/admin/pedidos/pedidos.component'
 
 
 const routes: Routes = [
@@ -146,6 +147,10 @@ const routes: Routes = [
       {
         path: 'registrar-admin',
         component: RegAdminComponent
+      },
+      {
+        path: 'pedidos',
+        component: PedidosComponent
       }
     ]
   }
@@ -169,7 +174,8 @@ const routes: Routes = [
     CheckoutComponent,
     ReadyComponent,
     HistorialComponent,
-    RegAdminComponent
+    RegAdminComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,

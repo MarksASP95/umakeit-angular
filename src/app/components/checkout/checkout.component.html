@@ -1,5 +1,11 @@
 <app-unavbar></app-unavbar>
 
+<div id="smallgroup">
+        <small>Pequeño: -20%</small>
+        <small>Grande: +20%</small>
+        <small>Mediano o sin modificar: mismo precio</small>
+</div>
+
 <table class="table">
   <thead>
       <tr>
@@ -18,7 +24,7 @@
           <td *ngIf="comida.mode !== ''; else nosize">{{ comida.mode }}</td>
           <ng-template #nosize><td>---</td></ng-template>
           <td>{{ comida.amount }}</td>
-          <td>${{ comida.price }}</td>
+          <td>${{ getSizedPrice(comida.price, comida.mode) }}</td>
           <td>${{ comida.price * comida.amount }}</td>
       </tr>
   </tbody>
@@ -27,16 +33,16 @@
 <div id="content">
 <form>
   <h4>¿A dónde quieres que enviemos esto?</h4>
-  <textarea placeholder="Escribe la dirección..." name="address" rows="5" required></textarea>
+  <textarea [(ngModel)]="address" (ngModelChange)="handleTextarea($event)" placeholder="Escribe la dirección..." name="address" rows="5" required></textarea>
 </form>
 
 <h2>Total a pagar:</h2>
 <h3 *ngIf="total !== 0">${{ total }}<span>,00</span></h3>
 
 <div id="paypal-stuff">
-  <div id="paypal-checkout-btn"></div>
+  <div class="purchase" id="paypal-checkout-btn"></div>
 </div>
-<button (click)="simularCompra()" style="display:block; margin:20px auto;" class="btn">Simular compra</button> 
+<button (click)="afterSuccessfulPay()" style="margin: 20px auto" class="btn purchase">Simular compra</button> 
 </div>
 
 <!-- <a class="btn btn-success" href="#">Comprar <i class="fas fa-check"></i></a> -->

@@ -21,6 +21,8 @@ export class CheckoutComponent implements OnInit{
   finalAmount: number = 10;
   paypalLoad: boolean = true;
 
+  address: string;
+
 /*   userUid: string; */
 
   constructor(private router: Router,
@@ -65,9 +67,9 @@ export class CheckoutComponent implements OnInit{
     let array = [];
     cartObject.forEach(product => {
       let obj = {
-        uid: product.uid,
-        amount: product.amount,
-        mode: product.mode
+        uid: product['uid'],
+        amount: product['amount'],
+        mode: product['mode']
       }
       array.push(obj);
     });
@@ -94,10 +96,7 @@ export class CheckoutComponent implements OnInit{
     onAuthorize: (data, actions) => {
       return actions.payment.execute().then(payment => {
         // do something when payment is successful
-        this.router.navigate(['/ready']);
-        console.log('PAID');
-        //console.log(this.userUid);
-        this.userService.storeCart(this.route.snapshot.data.userInfo.username);
+        this.afterSuccessfulPay();
         
       })
     }
@@ -122,11 +121,58 @@ export class CheckoutComponent implements OnInit{
     });
   }
 
-  simularCompra(){
+  afterSuccessfulPay(){
+
+    let rows = document.querySelectorAll('table tbody tr');
+    let dataPedido = {};
+    let foods = [];
+    for(let i = 0; i < rows.length; i++){
+      let food = {};
+      console.log(rows[i]);
+      food = {
+        name: rows[i].children[1].innerHTML,
+        mode: rows[i].children[2].innerHTML,
+        amount: rows[i].children[3].innerHTML
+      }
+
+      foods.push(food);
+    }
+
+    dataPedido = {
+      foods: foods,
+      address: this.address,
+      time: new Date()
+    }
+
+    this.comidaService.addPedido(dataPedido);
+
     this.router.navigate(['/ready']);
     console.log('PAID');
     //console.log(this.userUid);
     this.userService.storeCart(this.route.snapshot.data.userInfo.username);
+  }
+
+  handleTextarea(event){
+    if(this.address.length == 0){
+      $('.purchase').css('display','none');
+      
+    }
+    else{
+      $('.purchase').css('display','block');
+    }
+  }
+
+  getSizedPrice(precio, mode){
+    switch(mode){
+      case 'Mediano':
+        return Math.ceil(precio).toString();
+      case 'Grande':
+        return Math.ceil(precio*1.2).toString();
+      case 'Pequeño':
+        return Math.ceil(precio*0.8).toString();
+      case '':
+        return precio;
+    }
   }
 
 }

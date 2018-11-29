@@ -1,10 +1,36 @@
+<div id="hidden-menu">
+
+        <ng-container *ngIf="route.snapshot.data.userInfo.username !== null; then authenticatedMobile else guestMobile"></ng-container>
+        <ng-template #guestMobile>
+            <ul>
+                <li><a routerLink="/cart">Carrito</a></li>
+                <li><a id="btn" style="color:white;" routerLink="/auth">
+                    Entrar / Registrarse
+                </a></li>
+            </ul>
+        </ng-template>
+        <ng-template #authenticatedMobile>
+            <ul>
+                <li><a routerLink="/cart">Carrito</a></li>
+                <li><a routerLink="/cambiar_clave">Cambio de clave</a></li>
+                <li><a routerLink="/history">Compras</a></li>
+                <li *ngIf="route.snapshot.data.userInfo.isadmin"><a routerLink="/admin">ADMIN</a></li>
+                <li><a style="cursor:pointer;" (click)="signOut()">Salir</a></li>
+            </ul>
+            <span style="display:block; margin-top:50px; text-align: center;">{{route.snapshot.data.userInfo.username}}</span>
+        </ng-template>
+
+        <i class="fa fa-times" id="close"></i>
+
+</div>
+
 <div id="up-bar">
   <a routerLink="/"><h1>uMakeIt!</h1></a>
 <div id="up-bar-funcs">
 <form *ngIf="showSearch" name="search" (ngSubmit)="submitSearch(searchText)">
     <input [(ngModel)]="searchText" name="search" type="text" placeholder="Buscar producto...">
 </form>
-<a *ngIf="showCart" style="color: white;" routerLink="/cart"><i class="fas fa-shopping-cart"></i></a>
+<a *ngIf="showCart" style="color: white;" routerLink="/cart" id="cart"><i class="fas fa-shopping-cart"></i></a>
 <ng-container *ngIf="route.snapshot.data.userInfo.username !== null; then authenticated else guest"></ng-container>
 <ng-template #guest>
     <a id="btn" style="color:white;" routerLink="/auth">
@@ -16,7 +42,7 @@
 </ng-template>
 
 </div>
-
+<i class="fa fa-bars" id="menu-btn"></i>
   <div id="opc-user">
     <ul>
         <li><a routerLink="/cambiar_clave">Cambio de clave</a></li>

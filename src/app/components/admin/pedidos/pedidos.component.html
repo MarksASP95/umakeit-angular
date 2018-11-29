@@ -1,0 +1,20 @@
+<app-unavbar></app-unavbar>
+
+<div *ngFor="let pedido of pedidos; let i = index" class="table-container">
+    <h2>{{ formatDate(pedido.time.toDate()) }}</h2>
+  <table class="table">
+      <thead>
+          <th>Productos</th>
+          <th>Tamaño</th>
+          <th>Cantidad</th>
+      </thead>
+      <tbody>
+          <tr *ngFor="let producto of pedido.foods; let i = index">
+            <td>{{ producto.name }}</td>
+            <td>{{producto.mode}}</td>
+            <td>{{ producto.amount }}</td>
+          </tr>
+      </tbody>
+  </table>
+  <p style="color: white; width: 70%; margin: 20px auto; text-align: center;">Dirección: {{pedido.address}}</p>
+</div>

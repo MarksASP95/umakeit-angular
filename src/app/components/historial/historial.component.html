@@ -1,16 +1,19 @@
 <app-unavbar></app-unavbar>
 
+<small>Estos registros se mantendrán como los encontraste aunque los modifiques.</small>
 <div *ngFor="let cart of cartsDisplay; let i = index" class="table-container">
     <h2>{{ cart.time }}</h2>
   <table class="table" id="table{{i}}">
       <thead>
+          <th>X</th>
           <th>Productos</th>
           <th>Tamaño</th>
           <th>Cantidad</th>
           <th>Precio/Unidad</th>
       </thead>
       <tbody>
-          <tr [attr.data-uid]="producto.uid" *ngFor="let producto of cart.foods; let i = index">
+          <tr [ngClass]="producto.avaiable == false ? 'not-avaiable':'avaiable'" [attr.data-avaiable]="producto.avaiable" [attr.data-uid]="producto.uid" *ngFor="let producto of cart.foods; let i = index">
+            <td><button (click)="removeRow($event.target)" class="btn btn-danger">X</button></td>
             <td>{{ producto.name }}</td>
             <td *ngIf="producto.mode !== ''; else nosize">
                 <select name="mode">
@@ -27,6 +30,3 @@
   </table>
   <button (click)="recomprar(i)" class="btn btn-success">Recomprar</button>
 </div>
-<button class="btn btn-primary"></button>
-
-<!-- [ngClass]="comida.avaiable == false ? 'not-avaiable':'avaiable'" *ngFor="let producto of cart.cart" -->

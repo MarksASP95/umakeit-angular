@@ -10,7 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegAdminComponent implements OnInit {
 
-  user = {} as User;
+  user = {
+    username: '',
+    email: '',
+    password: ''
+  };
   users = [];
   userExists: boolean = false;
 
@@ -21,6 +25,6 @@ export class RegAdminComponent implements OnInit {
 
   submitRegister(){
     //console.log(`User: ${this.user.username}\nEmail: ${this.user.email}\nPassword: ${this.user.password}`);
-    this.auth.signUp(this.user.email,this.user.password, this.user.username, true);
+    this.auth.signUp(this.user['email'],this.user['password'], this.user['username'], true);
   }
 }
